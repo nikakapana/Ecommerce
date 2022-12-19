@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://seal-app-l3d7u.ondigitalocean.app/'
 };

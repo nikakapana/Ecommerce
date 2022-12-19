@@ -1,0 +1,32 @@
+header {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 80px;
+  margin-top: 48px;
+  margin-bottom: 50px;
+
+}
+h1 {
+  margin-bottom: 30px;
+  font-size: 44px;
+  line-height: 1.5;
+  letter-spacing: -1px;
+  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.2)
+  /* text-shadow: 0 5px 5px rgba(0, 0, 0, 0.07); */
+}
+
+.header-text {
+  margin-bottom: 24px;
+  font-size: 18px;
+  line-height: 1.7;
+  text-shadow: 0 5px 5px rgba(0, 0, 0, 0.2)
+}
+img {
+  height: 30rem;
+  width: 500px;
+  object-fit: cover
+}
+
+.hr {
+  margin-bottom: 45px;
+}

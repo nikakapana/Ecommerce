@@ -1,0 +1,23 @@
+
+<div>
+<header >
+  <div class="header-text-box">
+    <h1>We design and build better chairs, for a better life</h1>
+    <p class="header-text">
+      In a small shop in the heart of Lisbon, we spend our days
+      relentlessly perfecting the chair. The result is a perfect blend of
+      beauty and comfort, that will have a lasting impact on your health.
+    </p>
+    <a class="btn btn--big" href="#">Explore products</a>
+  </div>
+  <img src="assets/products/pexels-mister-mister-380782.jpg" alt="Photo" />
+</header>
+<hr class="hr">
+  <div class="row row-cols-auto gap-2 justify-content-between">
+
+    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+
+  </div>
+
+
+</div>

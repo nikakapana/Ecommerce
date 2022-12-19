@@ -1,0 +1,38 @@
+<header class="p-3 bg-dark text-white">
+  <div class="container">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-between gap-3">
+      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none logo">
+        <img src="assets/brand-logo.png" >
+      </a>
+
+
+      <div class="text-end d-flex flex-wrap align-items-center justify-content-center">
+      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+        <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+      </form>
+
+        <ng-container *ngIf="userIsAuthenticated; else notAuthenticated">
+          <p>{{authService.firstname}}</p>
+          <div class="dropdown m-3 ">
+            <button class="btn btn-outline-light me-2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile Manager
+            </button>
+            <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Content Manager</a></li>
+              <li><a class="dropdown-item" href="#">Orders</a></li>
+
+            </ul>
+          </div>
+          <button type="button" class="btn btn-outline-light me-2" routerLink="/" (click)="signOut()">Sign Out</button>
+        </ng-container>
+<ng-template #notAuthenticated>
+<div>
+        <button type="button" class="btn btn-outline-light me-2" routerLink="auth/login">Login</button>
+        <button type="button" class="btn btn-warning" routerLink="auth/sign-up">Sign-up</button>
+      </div>
+</ng-template>
+      </div>
+
+    </div>
+  </div>
+</header>
