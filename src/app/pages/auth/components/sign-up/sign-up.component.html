@@ -4,7 +4,9 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <img class="mb-4" src="/assets/brand-logo.png" alt="" width="100" height="65">
     <h1 class="h3 mb-3 fw-normal">Please sign up</h1>
-
+    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
     <div class="form-floating mb-2">
     <input type="text" class="form-control" id="firstName" placeholder="Firstname" formControlName="firstName">
     <label for="firstName">First Name</label>

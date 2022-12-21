@@ -11,8 +11,20 @@
         <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
       </form>
 
+        <ng-container *ngIf="userIsAuthenticated;">
+
+        <button type="button" class="btn btn-outline-success position-relative">
+          Cart
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    {{cartCount$ | async}}
+    <span class="visually-hidden">unread messages</span>
+  </span>
+        </button>
+
+      </ng-container>
+
         <ng-container *ngIf="userIsAuthenticated; else notAuthenticated">
-          <p>{{authService.firstname}}</p>
+          <p style="margin: 15px">Hello {{authService.user?.firstName}}!</p>
           <div class="dropdown m-3 ">
             <button class="btn btn-outline-light me-2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
               Profile Manager

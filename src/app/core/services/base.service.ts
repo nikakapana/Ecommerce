@@ -16,7 +16,7 @@ apiUrl = environment.apiUrl
   return this.http.post<T>(this.apiUrl + url, body)
   }
 
-  get<T>(url: string, params: any): Observable<T> {
+  get<T>(url: string, params?: any): Observable<T> {
   return this.http.get<T>(this.apiUrl+ url, {params})
   }
 

@@ -12,6 +12,9 @@ import { AuthAccessDirective } from './directives/auth-access.directive';
   imports: [
     CommonModule,
     SharedRoutingModule
+  ],
+  exports: [
+    AuthAccessDirective
   ]
 })
 export class SharedModule { }

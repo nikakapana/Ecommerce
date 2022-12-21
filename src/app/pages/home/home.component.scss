@@ -24,7 +24,12 @@ h1 {
 img {
   height: 30rem;
   width: 500px;
-  object-fit: cover
+  object-fit: cover;
+  //transition: all 0.4s;
+  //
+  //&:hover {
+  //  transform: scale(1.1);
+  //}
 }
 
 .hr {

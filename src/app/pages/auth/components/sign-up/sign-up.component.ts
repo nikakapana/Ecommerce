@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../../../core/services";
 import {Router} from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 
 @Component({
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit {
+export class SignUpComponent implements OnInit, OnDestroy {
 
   form: FormGroup  = new FormGroup( {
     firstName: new FormControl('', Validators.required),
@@ -19,7 +20,8 @@ export class SignUpComponent implements OnInit {
     confirmPassword:  new FormControl('', Validators.required)
 
   })
-
+  errorMessage?: string
+  sub$ = new Subject()
   constructor(
     private authService: AuthService,
     private router: Router
@@ -34,8 +36,26 @@ export class SignUpComponent implements OnInit {
 
     if (this.form.invalid) return
 
-    this.authService.signUp(this.form.value).subscribe(res => {
-      this.router.navigate(['auth/login'])
-    })
+    this.authService.signUp(this.form.value)
+      .pipe(takeUntil(this.sub$))
+
+      .subscribe( {
+        next: res => {
+          if(res) {
+            console.log(res)
+            this.router.navigate(['/'])
+          }
+        },
+        error: (error) => {
+          console.log(error)
+          this.errorMessage = error.error.message
+        }
+      }
+    )
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.next(null)
+    this.sub$.complete()
   }
 }

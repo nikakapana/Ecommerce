@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../../core/services";
+import {AuthService, CartService} from "../../../../core/services";
 import {Router} from "@angular/router";
+import {Subject, takeUntil, tap} from "rxjs";
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   form: FormGroup  = new FormGroup( {
 
@@ -17,10 +19,13 @@ export class LoginComponent implements OnInit {
 
 
   })
+errorMessage?: string
+  sub$ = new Subject()
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
 
   ) { }
 
@@ -32,11 +37,34 @@ export class LoginComponent implements OnInit {
 
     if (this.form.invalid) return
 
-    this.authService.login(this.form.value).subscribe(res => {
-      console.log(res)
-      this.router.navigate(['/'])
-    })
+    this.authService.login(this.form.value)
+      .pipe(
+        takeUntil(this.sub$),
+        tap( res => {
+          this.cartService.getCart().subscribe()
+        })
+      )
+      .subscribe( {
+        next: res => {
+        if(res) {
+          console.log(res)
+          this.router.navigate(['/'])
+        }
+        },
+        error: (error) => {
+this.errorMessage = error.error.message
+        }
+      }
+
+    )
 
 }
+
+  ngOnDestroy(): void {
+
+    this.sub$.next(null)
+    this.sub$.complete()
+
+  }
 
 }

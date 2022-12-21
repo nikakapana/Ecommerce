@@ -15,9 +15,9 @@ get token():string | null {
   return localStorage.getItem('token')
 }
 
-  // firstName(name: string): void {
-  //   return localStorage.setItem('firstname', name) ;
-  // }
+  firstName(name: string): void {
+    return localStorage.setItem('firstname', name) ;
+  }
 
 
 get user():User |null {
@@ -25,9 +25,7 @@ get user():User |null {
     return user ? JSON.parse(user) : null
 }
 
-get firstname():string | null {
-  return localStorage.getItem('firstname')
-}
+
   login(payload: Login): Observable<LoginResponse> {
     return this.post<LoginResponse>('auth/login', payload)
       .pipe(
@@ -35,7 +33,7 @@ get firstname():string | null {
           (response: LoginResponse) => {
             this.setToken(response.accessToken)
             this.setUser(response.user)
-this.setFirstname(response.firstname)
+
           }
         )
       )
@@ -49,9 +47,7 @@ this.setFirstname(response.firstname)
     localStorage.setItem('token', token)
   }
 
-  setFirstname(firstname: string): void {
-    localStorage.setItem('firstname', firstname)
-  }
+
 setUser(user: User): void {
   localStorage.setItem('user', JSON.stringify(user))
 }

@@ -77,7 +77,7 @@
     </ul>
     <div class="chair-price">
       <strong>{{product.price | currency: 'USD': true}}</strong>
-      <a href="#" class="btn btn--small">Add to cart</a>
+      <button *appAuthAccess class="btn btn-outline-dark me-2" (click)="addToCart()">Add to cart</button>
     </div>
   </div>
 </figure>
