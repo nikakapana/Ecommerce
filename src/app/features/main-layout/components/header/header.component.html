@@ -1,7 +1,7 @@
 <header class="p-3 bg-dark text-white">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-between gap-3">
-      <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none logo">
+      <a routerLink="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none logo">
         <img src="assets/brand-logo.png" >
       </a>
 
@@ -13,7 +13,7 @@
 
         <ng-container *ngIf="userIsAuthenticated;">
 
-        <button type="button" class="btn btn-outline-success position-relative">
+        <button routerLink="/cart" type="button" class="btn btn-outline-success position-relative">
           Cart
           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
     {{cartCount$ | async}}
@@ -30,8 +30,8 @@
               Profile Manager
             </button>
             <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item" href="#">Content Manager</a></li>
-              <li><a class="dropdown-item" href="#">Orders</a></li>
+              <li><a class="dropdown-item" routerLink="manager">Content Manager</a></li>
+              <li><a class="dropdown-item" routerLink="orders">Orders</a></li>
 
             </ul>
           </div>

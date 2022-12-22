@@ -1,0 +1,30 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea type="text" class="form-control" id="description" placeholder="description" formControlName="description"></textarea>
+  </div>
+
+    <div class="form-group">
+    <label for="image">Image URL</label>
+    <input type="text" class="form-control" id="image" placeholder="image" formControlName="image">
+  </div>
+  <div class="form-group">
+Category    <select class="form-select" aria-label="Default select example" formControlName="categoryId">
+    <option selected>Open this select menu</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+  </div>
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input type="number" class="form-control" id="price" placeholder="price" formControlName="price">
+  </div>
+
+  <button type="submit" class="btn btn-primary mt-2">Submit</button>
+
+</form>

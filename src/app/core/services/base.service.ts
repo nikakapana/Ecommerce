@@ -12,7 +12,7 @@ apiUrl = environment.apiUrl
     private http: HttpClient
   ) { }
 
-  post<T>(url: string, body: any): Observable<T> {
+  post<T>(url: string, body?: any): Observable<T> {
   return this.http.post<T>(this.apiUrl + url, body)
   }
 
@@ -20,4 +20,11 @@ apiUrl = environment.apiUrl
   return this.http.get<T>(this.apiUrl+ url, {params})
   }
 
+  delete<T>(url: string): Observable<T> {
+  return this.http.delete<T>(this.apiUrl + url)
+  }
+
+  put<T>(url: string, body?: any): Observable<T> {
+    return this.http.put<T>(this.apiUrl + url, body)
+  }
 }

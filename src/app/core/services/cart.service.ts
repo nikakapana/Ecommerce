@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from "./base.service";
-import {BehaviorSubject, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,12 @@ cartCount$ = this.cartCount.asObservable();
         this.cartCount.next(this.cartCount.value + payload.quantity)
       })
     )}
+
+
+  deleteItem(id: number): Observable<any> {
+    return this.delete(`cart/${id}`)
+
+  }
+
 
 }
