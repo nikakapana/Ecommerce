@@ -41,7 +41,7 @@
             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span>Comfortable for 4h</span>
+        <span>Comfortable for 24h</span>
       </li>
       <li>
         <svg
@@ -75,12 +75,12 @@
             d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
           />
         </svg>
-        <span>Weighs 16 kg</span>
+        <span>Weighs 80 g</span>
       </li>
     </ul>
     <div class="chair-price">
       <strong>{{product.price | currency: 'USD': true}}</strong>
-      <button *appAuthAccess class="btn btn-outline-dark me-2" (click)="addToCart()">Add to cart</button>
+      <button *appAuthAccess class="btn btn-outline-dark " (click)="addToCart()">Add to cart</button>
     </div>
   </div>
 </figure>

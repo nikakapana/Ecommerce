@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductsService} from "../../../../../core/services";
 import {ActivatedRoute, Router} from "@angular/router";
-import {of, switchMap} from "rxjs";
+import {Observable, of, switchMap} from "rxjs";
+import {Category} from "../../../../../core/interfaces";
+import {CategoryService} from "../../../../../core/services/category.service";
 
 @Component({
   selector: 'app-product-add-edit',
@@ -19,10 +21,14 @@ export class ProductAddEditComponent implements OnInit {
     price: new FormControl('', Validators.required),
     categoryId: new FormControl('', Validators.required),
   })
+
+  categories$: Observable<Category[]> = this.categoryService.getAll()
+
   constructor(
     private productsService: ProductsService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +43,8 @@ export class ProductAddEditComponent implements OnInit {
       })
     ).subscribe(res => {
       if (res) {
-        this.form.patchValue(res)
+        this.form.patchValue({...res,
+        categoryId: res.category.id})
       }
     })
   }

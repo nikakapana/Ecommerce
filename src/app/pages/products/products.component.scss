@@ -1,0 +1,10 @@
+.sidebar {
+  width: 200px;
+}
+
+.all-products {
+  &:active {
+    background-color: #087f5b;
+  }
+
+}

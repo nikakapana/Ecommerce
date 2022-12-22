@@ -15,9 +15,7 @@ get token():string | null {
   return localStorage.getItem('token')
 }
 
-  firstName(name: string): void {
-    return localStorage.setItem('firstname', name) ;
-  }
+
 
 
 get user():User |null {

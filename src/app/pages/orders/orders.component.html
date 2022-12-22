@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>Order Date</th>
+    <th>Total Price</th>
+    <th>Status</th>
+
+
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of orders$ | async">
+
+    <td>{{item.createdAt | date: "dd.MM.yy HH:mm"}}</td>
+    <td>{{item.subTotal}}</td>
+    <td>{{item.pending ? 'pending' : 'complete'}}</td>
+
+  </tr>
+  </tbody>
+</table>

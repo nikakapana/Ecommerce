@@ -1,0 +1,30 @@
+
+
+
+<div class="d-flex gap-4">
+  <div class="">
+    <div class="list-group sidebar">
+      <a
+         class="list-group-item list-group-item-action all-products"
+         [routerLink]="['/products']">All</a>
+      <a *ngFor="let category of categories$ | async"
+         [routerLink]="['/products']"
+         [queryParams]="{category: category.id}"
+         routerLinkActive="active"
+         class="list-group-item list-group-item-action"
+      >{{category.name}}</a>
+    </div>
+  </div>
+
+  <div>
+    <input type="search" class="form-control" placeholder="Search..." [ngModel]="search" (ngModelChange)="searchHandler($event)">
+  </div>
+
+  <div class="flex-fill">
+    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+
+  </div>
+</div>
+
+
+
