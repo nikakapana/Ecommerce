@@ -29,7 +29,7 @@ export class CategoryAddEditComponent implements OnInit {
     this.route.params.pipe(
       switchMap((params: any) => {
         if(params['id']) {
-          this.categoryService.getOne(params['id'])
+      return    this.categoryService.getOne(params['id'])
 
         }
      return of(null)

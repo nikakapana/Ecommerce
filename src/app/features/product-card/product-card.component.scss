@@ -10,6 +10,7 @@
   border-radius: 12px;
   margin-bottom: 45px;
   transition: all 0.4s;
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-1.2rem);
@@ -19,7 +20,9 @@
 .chair img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  width: 15rem;
+  width: 16rem;
+  object-fit: cover;
+  height: 200px;
 
 }
 .chair-box {

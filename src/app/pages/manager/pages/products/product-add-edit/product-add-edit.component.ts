@@ -30,7 +30,7 @@ export class ProductAddEditComponent implements OnInit {
     this.route.params.pipe(
       switchMap((params: any) => {
         if(params['id']) {
-          this.productsService.getOne(params['id'])
+        return  this.productsService.getOne(params['id'])
 
         }
         return of(null)
