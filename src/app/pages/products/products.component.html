@@ -1,6 +1,10 @@
 
+<!--<ng-container *ngIf="loading; else loaded">-->
+<!--  <div class="spinner-border " style="height: 70px; width: 70px; left: 50%; position: absolute; top: 32%" role="status">-->
 
-
+<!--  </div>-->
+<!--</ng-container>-->
+<!--  <ng-template #loaded>-->
 <div class="d-flex gap-4">
   <div class="">
     <div class="list-group sidebar">
@@ -20,11 +24,21 @@
     <input type="search" class="form-control" placeholder="Search..." [ngModel]="search" (ngModelChange)="searchHandler($event)">
   </div>
 
+
+
+
+<ng-container *ngIf="products.length; else noProducts">
   <div class="flex-fill">
     <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+  </div>
+</ng-container>
+
+  <ng-template #noProducts>
+    <div class="alert alert-danger container d-flex align-content-center justify-content-center"><h1>No products found :(</h1></div>
+  </ng-template>
 
   </div>
-</div>
+<!--  </ng-template>-->
 
 
 

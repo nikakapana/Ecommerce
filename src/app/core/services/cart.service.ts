@@ -5,7 +5,7 @@ import {BehaviorSubject, Observable, tap} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class CartService extends BaseService{
+export class CartService extends BaseService {
 
 cartCount = new BehaviorSubject(0);
 cartCount$ = this.cartCount.asObservable();

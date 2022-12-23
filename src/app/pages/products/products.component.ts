@@ -19,6 +19,7 @@ export class ProductsComponent implements OnInit {
 
   categories$: Observable<Category[]> = this.categoryService.getAll()
   search: any;
+  // loading = false;
   constructor(
     private productsService: ProductsService,
     private categoryService: CategoryService,
@@ -35,19 +36,25 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
+    // this.loading = true
     const params = {
       categoryId: this.categoryId || undefined,
       search: this.search || null
     }
     this.productsService.getProducts(params)
       .pipe()
-      .subscribe( res => {
-      this.products = res
-    })
+      .subscribe( {
+        next: (res => {
+          this.products = res
+          // setTimeout( () => {
+          //   this.loading = false
+          // }, 200)
+        })
+      })
   }
 
   searchHandler(search: string) {
-    if(search.length >3) {
+    if(search.length >2) {
       this.search = search
       this.getProducts()
     } else {
