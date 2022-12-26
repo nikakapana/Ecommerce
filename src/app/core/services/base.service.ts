@@ -30,5 +30,10 @@ apiUrl = environment.apiUrl
 
 
 
-
+  // setStorage(key: string, value: any): void {
+  //   localStorage.setItem(key, value)
+  // }
+  // getStorage (key: string): any {
+  //   return localStorage.getItem(key)
+  // }
 }

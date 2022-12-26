@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductsService} from "../../core/services";
 import {Category, Product} from "../../core/interfaces";
 import {CategoryService} from "../../core/services/category.service";
-import {Observable} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -10,9 +10,9 @@ import {ActivatedRoute} from "@angular/router";
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit, OnDestroy {
 
-
+sub$  = new Subject()
   products: Product[] = []
 
   categoryId?: number
@@ -27,8 +27,13 @@ export class ProductsComponent implements OnInit {
 
   ) { }
 
+  ngOnDestroy(): void {
+        this.sub$.next(null)
+    this.sub$.complete()
+    }
+
   ngOnInit(): void {
-    this.route.queryParams.subscribe( params => {
+    this.route.queryParams.pipe(takeUntil(this.sub$)).subscribe( params => {
       this.categoryId = params['category']
       this.getProducts()
     })
@@ -42,7 +47,7 @@ export class ProductsComponent implements OnInit {
       search: this.search || null
     }
     this.productsService.getProducts(params)
-      .pipe()
+      .pipe(takeUntil(this.sub$))
       .subscribe( {
         next: (res => {
           this.products = res

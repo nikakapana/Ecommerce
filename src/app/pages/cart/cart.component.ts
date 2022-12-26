@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CartService, OrderService} from "../../core/services";
 import {Cart} from "../../core/interfaces";
 import {BaseService} from "../../core/services/base.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss']
 })
-export class CartComponent implements OnInit {
-
+export class CartComponent implements OnInit, OnDestroy {
+  sub$ = new Subject()
   cartItems: Cart[] = []
   cartSum = 0
   constructor(
@@ -25,7 +26,7 @@ export class CartComponent implements OnInit {
 
   getCarts() {
     this.cartService.getCart()
-      .pipe()
+      .pipe(takeUntil(this.sub$))
       .subscribe(
         res => {
           this.cartItems = res
@@ -48,5 +49,10 @@ this.orderService.createOrder()
   .subscribe( res => {
     this.getCarts()
   })
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.next(null)
+    this.sub$.complete()
   }
 }
